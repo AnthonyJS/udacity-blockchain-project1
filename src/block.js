@@ -1,11 +1,11 @@
 /**
  *                          Block class
- *  The Block class is a main component into any Blockchain platform, 
+ *  The Block class is a main component into any Blockchain platform,
  *  it will store the data and act as a dataset for your application.
  *  The class will expose a method to validate the data... The body of
  *  the block will contain an Object that contain the data to be stored,
  *  the data should be stored encoded.
- *  All the exposed methods should return a Promise to allow all the methods 
+ *  All the exposed methods should return a Promise to allow all the methods
  *  run asynchronous.
  */
 
@@ -13,15 +13,14 @@ const SHA256 = require('crypto-js/sha256');
 const hex2ascii = require('hex2ascii');
 
 class Block {
-
     // Constructor - argument data will be the object containing the transaction data
     constructor(data) {
-        this.hash = null;                                           // Hash of the block
-        this.height = 0;      
-        this.address = null;                        
-        this.body = Buffer.from(JSON.stringify(data)).toString('hex');   // Will contain the transactions stored in the block, by default it will encode the data
-        this.time = 0;                                              // Timestamp for the Block creation
-        this.previousBlockHash = null;                              // Reference to the previous Block Hash
+        this.hash = null; // Hash of the block
+        this.height = 0;
+        this.address = null;
+        this.body = Buffer.from(JSON.stringify(data)).toString('hex'); // Will contain the transactions stored in the block, by default it will encode the data
+        this.time = 0; // Timestamp for the Block creation
+        this.previousBlockHash = null; // Reference to the previous Block Hash
     }
 
     /**
@@ -42,17 +41,17 @@ class Block {
             const originalHash = self.hash;
             const recalculatedHash = SHA256(JSON.stringify(self));
 
-            resolve(originalHash === recalculatedHash)
+            resolve(originalHash === recalculatedHash);
         });
     }
 
     /**
      *  Auxiliary Method to return the block body (decoding the data)
      *  Steps:
-     *  
+     *
      *  1. Use hex2ascii module to decode the data
      *  2. Because data is a javascript object use JSON.parse(string) to get the Javascript Object
-     *  3. Resolve with the data and make sure that you don't need to return the data for the `genesis block` 
+     *  3. Resolve with the data and make sure that you don't need to return the data for the `genesis block`
      *     or Reject with an error.
      */
     getBData() {
@@ -62,12 +61,13 @@ class Block {
 
             if (self.height) {
                 resolve(block);
-            }
-            else {
-                reject('This is the genesis block so block will not be returned');
+            } else {
+                reject(
+                    'This is the genesis block so block will not be returned'
+                );
             }
         });
     }
 }
 
-module.exports.Block = Block;                    // Exposing the Block class as a module
+module.exports.Block = Block; // Exposing the Block class as a module
