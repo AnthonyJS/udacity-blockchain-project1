@@ -1,6 +1,6 @@
 /**
  *  Block class
- * 
+ *
  *  The Block class is a main component into any Blockchain platform,
  *  it will store the data and act as a dataset for your application.
  *  The class will expose a method to validate the data... The body of
@@ -41,11 +41,11 @@ class Block {
         return new Promise((resolve) => {
             const originalHash = self.hash;
 
-			self.hash = null;
+            self.hash = null;
 
             const recalculatedHash = SHA256(JSON.stringify(self));
 
-			self.hash = originalHash;
+            self.hash = originalHash;
 
             resolve(originalHash === recalculatedHash);
         });
