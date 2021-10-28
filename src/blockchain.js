@@ -49,6 +49,9 @@ class Blockchain {
         });
     }
 
+    /**
+     * Private method to get the timestamp in a consistent manner
+     */
     _getTimeNow() {
         return parseInt(new Date().getTime().toString().slice(0, -3));
     }
@@ -81,19 +84,19 @@ class Blockchain {
 
                 block.hash = SHA256(JSON.stringify(block)).toString();
 
-                self.height++;
+                const errorLogs = await self.validateChain();
+
+                if (errorLogs.length) {
+                    return reject(`Adding block validation failed`);
+                }
+
                 self.chain.push(block);
+                self.height++;
 
                 console.info(`Block added at height ${block.height} with hash ${block.hash}`);
                 console.debug({ block });
 
-                const errorLogs = await self.validateChain();
-
-                if (errorLogs.length) {
-                    reject(`Adding block validation failed`);
-                } else {
-                    resolve(block);
-                }
+                resolve(block);
             } catch (exception) {
                 reject(`Adding block failed - ${exception} `);
             }

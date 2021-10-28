@@ -96,6 +96,7 @@ class BlockchainController {
         });
     }
 
+    // This endpoint allows you to perform validation on the chain (GET endpoint)
     validateChain() {
         this.app.get("/validateChain", async (req, res) => {
             try {
