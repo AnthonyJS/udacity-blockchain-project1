@@ -84,9 +84,7 @@ class Blockchain {
                 self.height++;
                 self.chain.push(block);
 
-                console.info(
-                    `Block added at height ${block.height} with hash ${block.hash}`
-                );
+                console.info(`Block added at height ${block.height} with hash ${block.hash}`);
                 console.debug({ block });
 
                 const errorLogs = await self.validateChain();
@@ -199,9 +197,7 @@ class Blockchain {
             let blocks = self.chain.filter((p) => p.address === address);
 
             if (blocks.length) {
-                stars = await Promise.all(
-                    blocks.map(async (b) => await b.getBData())
-                );
+                stars = await Promise.all(blocks.map(async (b) => await b.getBData()));
 
                 resolve(stars);
             } else {
@@ -224,15 +220,11 @@ class Blockchain {
 
             self.chain.forEach((c) => {
                 if (!c.validate()) {
-                    errorLog.push(
-                        `Block at height ${c.height} has invalid hash`
-                    );
+                    errorLog.push(`Block at height ${c.height} has invalid hash`);
                 }
 
                 if (previousBlockHash !== c.previousBlockHash) {
-                    errorLog.push(
-                        `Previous block hash at height ${c.height} is incorrect`
-                    );
+                    errorLog.push(`Previous block hash at height ${c.height} is incorrect`);
                 }
 
                 previousBlockHash = c.hash;

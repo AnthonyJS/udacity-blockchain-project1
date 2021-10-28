@@ -1,0 +1,37 @@
+### Install REST Client in VS Code to run these cURL requests in the IDE
+### https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+### Get the block at height 0
+curl -L -X GET 'http://localhost:8000/block/height/0'
+
+### Create a message formatted like:
+### <WALLET_ADRESS>:${new Date().getTime().toString().slice(0,-3)}:starRegistry
+### which will then be signed in Bitcoin Core using the private key in your wallet
+curl -L -X POST 'http://localhost:8000/requestValidation' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+	"address": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS"
+}'
+
+### Submit a star to the private blockchain
+curl -L -X POST 'http://localhost:8000/submitstar' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+	"address": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS",
+	"signature": "IBr/Bv22XGBoWCJQkYBtUn/yO0m3lOJpCHRXFlstOPP+ExF7kRjp21PHr+BA1J37Qk68ghsMK3SEEkbovyGyOVc=",
+	"message": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS:1635279399:starRegistry",
+	"star": {
+            "dec": "68° 52'''' 56.9",
+            "ra": "16h 29m 1.0s",
+            "story": "Testing the story 4"
+		}
+}'
+
+### Get array of stars associated with given address
+curl -L -X GET 'http://localhost:8000/blocks/mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS'
+
+### Get block with given hash
+curl -L -X GET 'http://localhost:8000/block/hash/f98e2a9f28aaaac59a7662b3d2fba5c3f8d861d2d76108339a963fa0b13a0ca0'
+
+### Validate the integrity of the chain
+curl -L -X GET 'http://localhost:8000/validateChain'

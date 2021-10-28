@@ -199,36 +199,3 @@ You should see in your terminal a message indicating that the server is listenin
      ![Request: http://localhost:8000/submitstar](https://s3.amazonaws.com/video.udacity-data.com/topher/2019/April/5ca365d3_signing-message/signing-message.png)
 6. Retrieve Stars owned by me
     ![Request: http://localhost:8000/blocks/<WALLET_ADDRESS>](https://s3.amazonaws.com/video.udacity-data.com/topher/2019/April/5ca362b9_retrieve-stars/retrieve-stars.png)
-
-
-
-```curl -L -X GET 'http://localhost:8000/block/height/0'```
-
-```
-curl -L -X POST 'http://localhost:8000/requestValidation' \
--H 'Content-Type: application/json' \
---data-raw '{
-	"address": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS"
-}'
-```
-
-```
-curl -L -X POST 'http://localhost:8000/submitstar' \
--H 'Content-Type: application/json' \
---data-raw '{
-	"address": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS",
-	"signature": "HyLaf9VPAvT6xwR6GW+088dZOghRxdSyyPPceuKrlduEY+gNhPYZNnOIdeoGW4V+4gMGeeOkkBkO/OhFvMhFLQQ=",
-	"message": "mxrgUT4ec4bmM1vNftak1hKLMwzgjF9bkS:1635197898:starRegistry",
-	"star": {
-            "dec": "68° 52'\'' 56.9",
-            "ra": "16h 29m 1.0s",
-            "story": "Testing the story 4"
-		}
-
-}'
-```
-
-
-```
-getnewaddress "" legacy
-```

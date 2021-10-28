@@ -1,5 +1,6 @@
 /**
- *                          Block class
+ *  Block class
+ * 
  *  The Block class is a main component into any Blockchain platform,
  *  it will store the data and act as a dataset for your application.
  *  The class will expose a method to validate the data... The body of
@@ -62,9 +63,7 @@ class Block {
             if (self.height) {
                 resolve(block);
             } else {
-                reject(
-                    'This is the genesis block so block will not be returned'
-                );
+                reject('This is the genesis block so block will not be returned');
             }
         });
     }
