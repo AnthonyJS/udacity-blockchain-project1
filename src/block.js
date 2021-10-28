@@ -40,7 +40,12 @@ class Block {
         let self = this;
         return new Promise((resolve) => {
             const originalHash = self.hash;
+
+			self.hash = null;
+
             const recalculatedHash = SHA256(JSON.stringify(self));
+
+			self.hash = originalHash;
 
             resolve(originalHash === recalculatedHash);
         });

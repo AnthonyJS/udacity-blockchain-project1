@@ -226,8 +226,8 @@ class Blockchain {
         return new Promise(async (resolve) => {
             let previousBlockHash = null;
 
-            self.chain.forEach((c) => {
-                if (!c.validate()) {
+            self.chain.forEach(async (c) => {
+                if (await !c.validate()) {
                     errorLog.push(`Block at height ${c.height} has invalid hash`);
                 }
 
